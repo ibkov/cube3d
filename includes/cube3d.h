@@ -28,7 +28,7 @@ typedef struct	p_gmr
 	double      dirY;
 	double		planeX;
 	double		planeY;
-	int 		worldMap[mapWidth][mapHeight];
+	int 		**worldMap;
 
 	
 }				pos_gamer;
@@ -44,5 +44,6 @@ typedef struct	s_mlx
 
 int press_key(int keycode, t_mlx *mlx);
 int draw_ray_casting(t_mlx *mlx);
+void parcer_map(char *file_name, pos_gamer *pos);
 
 #endif

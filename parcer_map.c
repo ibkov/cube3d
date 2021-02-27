@@ -1,6 +1,7 @@
-// #include "includes/cube3d.h"
+#include "includes/cube3d.h"
 #include "gnl/get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 // static int		check_map_norme(
 // 	t_window *win_infos,
@@ -136,24 +137,51 @@
 // 	return (map);
 // }
 
-
-
-
-
-// int parcer_map(int fd)
-// {
-    
-//     char *line_map;
-
-//     while (get_next_line(fd, &line_map) != 0)
-//     {
-//         printf("%s\n", map);
-//     }
-// }
-
-int main()
+void parcer_map(char *file_name, pos_gamer *pos)
 {
+    
+    char *line_map;
+    int i;
+    int j;
+    int w;
+    int h;
     int fd;
-    fd = open("map.cub", O_RDONLY);
-    parcer_map(fd);
+
+    h = 0;
+    fd = open(file_name, O_RDONLY);
+    while (get_next_line(fd, &line_map) != 0)
+    {
+        
+        w = 0; 
+        while (line_map[w])
+            w++;
+        h++;
+    }
+    h += 1;
+    pos->worldMap = (int**)malloc(sizeof(int*) * h);
+    i = 0;
+    while(i < w)
+    {
+        pos->worldMap[i] = (int*)malloc(sizeof(int) * w);
+        i++;
+    }
+    i = 0;
+    j = 0;
+    fd = open(file_name, O_RDONLY);
+    while (get_next_line(fd, &line_map) != 0)
+    {
+        i = 0;
+        while (line_map[i])
+        {
+            pos->worldMap[j][i] = (line_map[i] - 48);
+            i++;    
+        }
+        j++;   
+    }
+    i= 0;
+    while (line_map[i])
+        {
+            pos->worldMap[j][i] = (line_map[i] - 48);
+            i++;
+        }
 }

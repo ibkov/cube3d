@@ -22,7 +22,6 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *string, int symbol);
 void				*ft_memset (void *destination, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
