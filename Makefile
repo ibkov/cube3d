@@ -10,6 +10,8 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		make -C minilibx_opengl_20191021
 		mv minilibx_opengl_20191021/libmlx.a .
+		make -C libft
+		mv libft/libft.a .
 		gcc -Wall -g -Werror -Wextra -c $(SRC)
 		gcc -Wall -g -Werror -Wextra -L. -lmlx -lft -framework OpenGL -framework Appkit $(OBJ) -o $(NAME)
 
