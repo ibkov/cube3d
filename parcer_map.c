@@ -147,7 +147,7 @@ void parcer_map(char *file_name, pos_gamer *pos)
     int h;
     int fd;
 
-    h = 0;
+    h = 1;
     fd = open(file_name, O_RDONLY);
     while (get_next_line(fd, &line_map) != 0)
     {
@@ -157,14 +157,9 @@ void parcer_map(char *file_name, pos_gamer *pos)
             w++;
         h++;
     }
-    h += 1;
-    ft_putstr_fd("h" ,1);
-    ft_putchar_fd(*ft_itoa(h), 1);
-    ft_putstr_fd("\nw" ,1);
-    ft_putchar_fd(*ft_itoa(w), 1);
     pos->worldMap = (int**)malloc(sizeof(int*) * h);
     i = 0;
-    while(i < w)
+    while(i < h)
     {
         pos->worldMap[i] = (int*)malloc(sizeof(int) * w);
         i++;
@@ -176,18 +171,20 @@ void parcer_map(char *file_name, pos_gamer *pos)
     while (get_next_line(fd, &line_map) != 0)
     {
         i = 0;
-        while (line_map[i])
-        {
+        while (line_map[i] && i < w)
+        { 
             pos->worldMap[j][i] = (line_map[i] - 48);
-            i++;    
+            i++;  
+            
         }
-        j++;   
+        if (j < h)
+            j++;   
+            
     }
+    j--;
     i= 0;
-    ft_putstr_fd(line_map, 1);
     while (line_map[i])
         {
-            ft_putchar_fd(line_map[i], 1);
             pos->worldMap[j][i] = (line_map[i] - 48);
             i++;
         }
