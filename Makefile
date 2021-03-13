@@ -1,6 +1,12 @@
 NAME = my_screen
 
-SRC = cude.c proc_keys.c parcer_map.c gnl/get_next_line.c gnl/get_next_line_utils.c
+SRC = cude.c \
+		proc_keys.c \
+		parcer_map.c \
+		ray_casting.c \
+		init_begin_position.c \
+		gnl/get_next_line.c \
+		gnl/get_next_line_utils.c \
 
 
 OBJ = $(SRC:.c=.o)

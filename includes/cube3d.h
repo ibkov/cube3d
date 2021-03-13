@@ -5,11 +5,9 @@
 # include "../minilibx_mms_20200219/mlx.h"
 # include "../libft/libft.h"
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 400
+# define WIN_HEIGHT 300
 
-#define mapWidth 24
-#define mapHeight 24
 
 typedef struct	s_img
 {
@@ -28,6 +26,8 @@ typedef struct	p_gmr
 	double      dirY;
 	double		planeX;
 	double		planeY;
+	double		texWidht;
+	double		texHeight;
 	int 		**worldMap;
 
 	
@@ -45,5 +45,7 @@ typedef struct	s_mlx
 int press_key(int keycode, t_mlx *mlx);
 int draw_ray_casting(t_mlx *mlx);
 void parcer_map(char *file_name, pos_gamer *pos);
+int draw_ray_casting(t_mlx *mlx);
+void init_position(pos_gamer *pos);
 
 #endif
