@@ -1,9 +1,26 @@
 #include "includes/cube3d.h"
+#include "libft/libft.h"
 #include "gnl/get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
 
-void parcer_map(char *file_name, pos_gamer *pos)
+
+// void leave_spaces(char *line)
+// {
+    
+// }
+
+int parse_line(char *line_map)
+{
+int w;
+
+w = ft_strlen(line_map);
+while (line_map[w])
+     w++;
+return (w);
+}
+
+int  parcer_map(char *file_name, pos_gamer *pos)
 {
     
     char *line_map;
@@ -17,10 +34,10 @@ void parcer_map(char *file_name, pos_gamer *pos)
     fd = open(file_name, O_RDONLY);
     while (get_next_line(fd, &line_map) != 0)
     {
-        
         w = 0; 
-        while (line_map[w])
-            w++;
+        if ((w = parse_line(line_map)) == -1)
+            return (-1);
+       
         h++;
     }
     pos->worldMap = (int**)malloc(sizeof(int*) * h);
@@ -53,4 +70,5 @@ void parcer_map(char *file_name, pos_gamer *pos)
             pos->worldMap[j][i] = (line_map[i] - 48);
             i++;
         }
+        return (1);
 }

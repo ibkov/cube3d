@@ -12,6 +12,16 @@ int main(int args, char **argv)
 
   if (args == 2)
   {
+    void    *mlx1;
+    void    *img1;
+    char    *relative_path = "./test.png";
+    int     img_width;
+    int     img_height;
+
+    mlx1 = mlx_init();
+    img1 = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+    printf("%s", img1);
+
     parcer_map(argv[1], &mlx.pos);
     // init_map(&mlx.pos);
     init_position(&mlx.pos);

@@ -93,6 +93,9 @@ int draw_ray_casting(t_mlx *mlx)
       int drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
       if(drawEnd >= WIN_HEIGHT)drawEnd = WIN_HEIGHT - 1;
 
+      
+
+
       //choose wall color
       int color = 0xFFFFFF;
       int red_color = 0xff3333;

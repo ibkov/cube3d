@@ -44,7 +44,7 @@ typedef struct	s_mlx
 
 int press_key(int keycode, t_mlx *mlx);
 int draw_ray_casting(t_mlx *mlx);
-void parcer_map(char *file_name, pos_gamer *pos);
+int  parcer_map(char *file_name, pos_gamer *pos);
 int draw_ray_casting(t_mlx *mlx);
 void init_position(pos_gamer *pos);
 
