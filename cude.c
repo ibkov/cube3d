@@ -12,19 +12,10 @@ int main(int args, char **argv)
 
   if (args == 2)
   {
-    void    *mlx1;
-    void    *img1;
-    char    *relative_path = "./test.png";
-    int     img_width;
-    int     img_height;
-
-    mlx1 = mlx_init();
-    img1 = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-    printf("%s", img1);
-
+    
+    init_position(&mlx.pos);
     parcer_map(argv[1], &mlx.pos);
     // init_map(&mlx.pos);
-    init_position(&mlx.pos);
     mlx.mlx_ptr = mlx_init();
     mlx.win = mlx_new_window(mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Game cube3d school_21");
     draw_ray_casting(&mlx);

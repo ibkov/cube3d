@@ -5,10 +5,6 @@
 # include "../minilibx_mms_20200219/mlx.h"
 # include "../libft/libft.h"
 
-# define WIN_WIDTH 400
-# define WIN_HEIGHT 300
-
-
 typedef struct	s_img
 {
 	void		*img_ptr;
@@ -37,8 +33,11 @@ typedef struct	s_mlx
 {
 	void		*mlx_ptr;
 	void		*win;
+	int 		win_width;
+	int 		win_height;
 	t_img		img;
 	pos_gamer	pos;
+	
 }				t_mlx;
 
 
