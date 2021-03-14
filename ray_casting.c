@@ -4,7 +4,7 @@ void verLine(int x, int drawStart, int drawEnd, int color, t_mlx mlx)
 {
     while (drawStart < drawEnd)
     {
-        mlx.img.data[drawStart * WIN_WIDTH + x] = color;
+        mlx.img.data[drawStart * mlx.args.screen_w + x] = color;
         drawStart++;
     }
 }
@@ -14,12 +14,12 @@ int draw_ray_casting(t_mlx *mlx)
       int x;
 
       x = 0;
-      mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+      mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->args.screen_w, mlx->args.screen_h);
       mlx->img.data = (int *)mlx_get_data_addr(mlx->img.img_ptr, &mlx->img.bpp, &mlx->img.size_l,
 		  &mlx->img.endian);
-      while (x < WIN_WIDTH)
+      while (x < mlx->args.screen_w)
       {
-      double cameraX = 2 * x / (double)WIN_WIDTH - 1; 
+      double cameraX = 2 * x / (double)mlx->args.screen_w - 1; 
       double rayDirX = mlx->pos.dirX + mlx->pos.planeX * cameraX;
       double rayDirY = mlx->pos.dirY + mlx->pos.planeY * cameraX;
       int mapX = (int)(mlx->pos.posX);
@@ -85,13 +85,13 @@ int draw_ray_casting(t_mlx *mlx)
       else          perpWallDist = (mapY - mlx->pos.posY + (1 - stepY) / 2) / rayDirY;
 
       //Calculate height of line to draw on screen
-      int lineHeight = (int)(WIN_HEIGHT / perpWallDist);
+      int lineHeight = (int)(mlx->args.screen_w / perpWallDist);
 
       //calculate lowest and highest pixel to fill in current stripe
-      int drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
+      int drawStart = -lineHeight / 2 + mlx->args.screen_h / 2;
       if(drawStart < 0)drawStart = 0;
-      int drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
-      if(drawEnd >= WIN_HEIGHT)drawEnd = WIN_HEIGHT - 1;
+      int drawEnd = lineHeight / 2 + mlx->args.screen_h / 2;
+      if(drawEnd >= mlx->args.screen_h)drawEnd = mlx->args.screen_h - 1;
 
       //choose wall color
       int color = 0xFFFFFF;

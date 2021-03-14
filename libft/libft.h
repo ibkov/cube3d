@@ -71,5 +71,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),\
 void (*del)(void *));
 char				*ft_utoa(unsigned int n);
+int 				ft_nbr_len(int nbr, int base_len);
 
 #endif

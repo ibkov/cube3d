@@ -1,6 +1,5 @@
 #include "includes/cube3d.h"
 #include "gnl/get_next_line.h"
-#include <fcntl.h>
 #include <stdio.h>
 
 void parcer_map(char *file_name, pos_gamer *pos)
