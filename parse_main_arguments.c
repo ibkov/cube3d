@@ -5,12 +5,15 @@ int check_screen_arg(t_mlx *mlx, char *buffer)
   int i;
   
   i = 0;
-  while(!ft_isdigit(buffer[i]))
-    i++;
+  while(!ft_isdigit(buffer[i]) && !ft_strchr("+-" , buffer[i]))
+      i++;
   mlx->args.screen_w = ft_atoi(&buffer[i]);
-  while(ft_isdigit(buffer[i]))
-    i++;
+  while(ft_isdigit(buffer[i]) || ft_strchr("+-" , buffer[i]))
+      i++;
   mlx->args.screen_h = ft_atoi(&buffer[i]);
+  while ((ft_strchr("\t\v\r\f", buffer[i]) || ft_isdigit(buffer[i]))\
+			&& buffer[i] != '\0')
+		i++;
   if (mlx->args.screen_h <= 0 || mlx->args.screen_w <= 0)
 		return (0);
   if (mlx->args.screen_h >= MAX_SCREEN_H)
@@ -20,53 +23,56 @@ int check_screen_arg(t_mlx *mlx, char *buffer)
   return (SUCCESS);
 }
 
-t_map	*ft_lstn(char *content)
-{
-	t_map	*new_elem;
+// char *cor_start_ch(char *buffer)
+// {
+//   int len;
+//   int i;
+//   char ch; 
+//   int count_s;
 
-	if (!(new_elem = malloc(sizeof(t_map))))
-		return (0);
-	new_elem->line = ft_strdup(content);
-	new_elem->next = 0;
-	return (new_elem);
-}
+//   i = 0;
+//   count_s = 0;
+//   len = ft_strlen(buffer);
+//   while (buffer[count_s] == ' ')
+//     count_s++;
+//   ch = buffer[count_s];
+//   while (i < count_s)
+//   {
+//     buffer[i] = ch;
+//     i++;
+//   }
+//   return (buffer);
+// }
 
-t_map	*ft_lstl(t_map *lst)
-{
-	t_map	*last_lst;
+// char *cor_sp(char *buffer)
+// {
+//   int i;
+//   int j;
+//   char ch_r;
+//   char ch_l;
 
-	last_lst = lst;
-	if (!lst)
-		return (0);
-	while (lst->next)
-	{
-		last_lst = lst;
-		lst = lst->next;
-	}
-	if (!lst->next)
-		return (lst);
-	return (last_lst);
-}
-
-void	ft_lstadd_b(t_map **lst, t_map *new)
-{
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	if (!new)
-		return ;
-	ft_lstl(*lst)->next = new;
-	new->next = 0;
-}
-
-int map_to_list(t_mlx *mlx, char *buffer)
-{
-    // printf("%s\n", buffer);
-    ft_lstadd_b(&mlx->args.map, ft_lstn(buffer)); 
-    return (SUCCESS);
-}
+//   i = 0;
+//   j = 0;
+//   while(buffer[j])
+//   {
+//     if (!ft_strchr("NWES2 ", buffer[i]))
+//       ch_l = buffer[i];
+//     if (buffer[i] == ' ' && i >= j)
+//     {
+//       while(buffer[i] == ' ')
+//         i++;
+//       ch_r = buffer[i];
+//     }
+//     if (buffer[j] == ' ' && !ft_strchr("NWES2", ch_r))
+//       buffer[j] = ch_r;
+//     else if (buffer[j] == ' ' && ft_strchr("NWES2", ch_r))
+//       buffer[j] = ch_l;
+//     j++;
+//     if (i < j)
+//       i++;
+//   }
+//   return (buffer);
+// }
 
 int check_arguments(t_mlx *mlx, char *buffer)
 {

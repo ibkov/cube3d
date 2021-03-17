@@ -10,9 +10,33 @@ void	ft_lstwrite(t_map *lst)
 		printf("%s\n", lst->line);
 		lst = lst->next;
 	}
+  if (!lst->next)
+		printf("%s\n", lst->line);
 }
 
-int main(int args, char **argv)
+int check_main_arg(int argc, char **argv)
+{
+  if (argc > 3)
+    return (ERROR);
+  if(argc < 2)
+    return (ERROR);
+  if (argc == 2)
+    if (!(ft_strncmp(argv[1] + ft_strlen(argv[1] - 4) , ".cub", 4)))
+      return (ERROR);
+  if (argc == 3)
+		if (ft_strncmp(argv[2], "--save", 6))
+			return (ERROR);
+  return (SUCCESS);
+}
+
+
+int check_map_run(int argc, char **argv)
+{
+  
+}
+
+
+int main(int argc, char **argv)
 {
   t_mlx	mlx;
   int fd;
@@ -22,7 +46,8 @@ int main(int args, char **argv)
   check_file = 0;
   ft_bzero(&mlx.args, sizeof(mlx.args));
   fd = open(argv[1], O_RDWR);
-
+  if (check_main_arg(argc, argv) != SUCCESS)
+		return (0);
   while ((check_file = get_next_line(fd, &buffer)) > 0)
 	{
       if (check_arguments(&mlx, buffer) != SUCCESS)
@@ -31,15 +56,18 @@ int main(int args, char **argv)
   }
   if (check_arguments(&mlx, buffer) != SUCCESS)
       return (ERROR_ARGUMENTS);
-  ft_lstwrite(mlx.args.map);
+  // ft_lstwrite(mlx.args.map);
   if (buffer)
     free(buffer);
+  if (check_map_run(argc, argv) != SUCCESS)
+	  return (MAP_ERROR);
+
   // if (check_file == -1)
   //   return (ERROR);
   
   
 
-  if (args == 2)
+  if (argc == 2)
   {
     parcer_map(argv[1], &mlx.pos);
     // init_map(&mlx.pos);
@@ -51,7 +79,7 @@ int main(int args, char **argv)
     mlx_put_image_to_window(mlx.mlx_ptr, mlx.win, mlx.img.img_ptr, 0, 0);
     mlx_loop(mlx.mlx_ptr);
   }
-  else if (args == 3 && !ft_strncmp(argv[2], "--save", 7))
+  else if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
     ft_putstr_fd("\033[31mNO ARGUMENTS TO LOAD MAP.\033[0m\n", 1);
   else
     ft_putstr_fd("\033[31mNO ARGUMENTS TO LOAD MAP.\033[0m\n", 1);

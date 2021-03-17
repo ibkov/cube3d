@@ -89,5 +89,7 @@ void init_position(pos_gamer *pos);
 int check_texture_arg(t_mlx *mlx, char *buffer);
 int check_arguments(t_mlx *mlx, char *buffer);
 int check_fc_arg(t_mlx *mlx, char *buffer);
+char *cor_start_ch(char *buffer);
+int map_to_list(t_mlx *mlx, char *buffer);
 
 #endif
